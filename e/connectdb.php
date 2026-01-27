@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pwd  = "";
-$db   = "4063db";
+$db   = "4120db";
 
 $conn = mysqli_connect($host, $user, $pwd, $db)
         or die("เชื่อมต่อฐานข้อมูลไม่ได้");
