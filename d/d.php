@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<title>สุพัตรา หาญกุดเลาะ(ปริม)</title>
+<title>อริศรา พวงมาลัย (กุ๊ก)</title>
 
 <!-- Bootstrap 5.3 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 <body>
 
 <div class="container">
-    <h1 class="text-center mt-4">ฟอร์มสมัครสมาชิก — สุพัตรา หาญกุดเลาะ (ปริม) -- ChatGPT</h1>
+    <h1 class="text-center mt-4">ฟอร์มสมัครสมาชิก — อริศรา พวงมาลัย (กุ๊ก) -- ChatGPT</h1>
 
     <div class="col-md-6 mx-auto form-box">
 

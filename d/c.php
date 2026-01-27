@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ฟอร์มสมัครสมาชิก | สุพัตรา หาญกุดเลาะ(ปริม)</title>
+<title>ฟอร์มสมัครสมาชิก | อริศรา พวงมาลัย (กุ๊ก)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
     /* ปรับแต่งเพิ่มเติม */
@@ -41,7 +41,7 @@
         <div class="col-lg-7 col-md-9">
             <div class="form-box">
                 <h1 class="text-center mb-4 text-primary">ฟอร์มสมัครสมาชิก</h1>
-                <p class="text-center mb-4">สุพัตรา หาญกุดเลาะ(ปริม) -- Gemini</p>
+                <p class="text-center mb-4">อริศรา พวงมาลัย (กุ๊ก) -- Gemini</p>
 
                 <form method="post" action="">
 

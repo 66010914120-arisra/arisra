@@ -81,7 +81,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="page-title">
                 <i class="fa-solid fa-cart-shopping text-primary me-2"></i>
-                สุพัตรา หาญกุดเลาะ (ปริม)
+                อริศรา พวงมาลัย (กุ๊ก)
             </h2>
             <span class="text-muted">ระบบจัดการสต็อกสินค้า v2.0</span>
         </div>

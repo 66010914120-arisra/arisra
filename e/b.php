@@ -1,156 +1,116 @@
-<?php
-include_once("connectdb.php");
-
-if (isset($_POST['jobPosition'])) {
-
-    $job_position     = $_POST['jobPosition'];
-    $prefix           = $_POST['prefix'];
-    $full_name        = $_POST['fullName'];
-    $birth_date       = $_POST['birthDate'];
-    $education_level  = $_POST['educationLevel'];
-    $skills           = $_POST['skills'];
-    $experience       = $_POST['experience'];
-    $application_date = date("Y-m-d");
-
-    $sql = "INSERT INTO applications
-    (job_position, prefix, full_name, birth_date, education_level, skills, experience, application_date)
-    VALUES
-    ('$job_position','$prefix','$full_name','$birth_date','$education_level','$skills','$experience','$application_date')";
-
-    mysqli_query($conn, $sql) or die("insert ไม่ได้");
-
-    echo "<script>alert('เพิ่มข้อมูลสำเร็จ');</script>";
-}
-?>
 <!doctype html>
 <html lang="th">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ใบสมัครงาน | บริษัท PP (ปริมปริม) จำกัด</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>ฟอร์มสมัครงาน - อริศรา พวงมาลัย(กุ๊ก)</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
-body {
-    padding-top: 30px;
-    background-color: #f4f7f6;
-}
-.application-form {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
-.form-heading {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-    color: #007bff;
-}
-.accordion-item {
-    margin-top: 15px;
-}
+  body{background:#f5f6fa}
+  .box{
+    background:#fff; padding:30px; border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1); margin-top:30px;
+  }
 </style>
 </head>
 
 <body>
 <div class="container">
-<div class="row justify-content-center">
-<div class="col-lg-8">
-<div class="application-form">
+  <h1 class="text-center mt-4">ฟอร์มสมัครงาน</h1>
+  <p class="text-center text-secondary mb-0">อริศรา พวงมาลัย(กุ๊ก)</p>
 
-<h1 class="text-center form-heading">ใบสมัครงาน</h1>
-<p class="text-center mb-4">บริษัท PP (ปริมปริม) จำกัด</p>
+  <div class="col-md-6 mx-auto box">
 
-<form method="post" action="#">
+    <form method="post" action="">
+      <div class="mb-3">
+        <label class="form-label">ชื่อ-สกุล</label>
+        <input type="text" name="name" class="form-control" required autofocus>
+      </div>
 
-<h5 class="mt-4 mb-3 text-secondary">1. ข้อมูลตำแหน่งงาน</h5>
-<div class="mb-3">
-<label class="form-label">ตำแหน่งที่ต้องการสมัคร <span class="text-danger">*</span></label>
-<select class="form-select" name="jobPosition" required>
-<option value="" disabled selected>--- เลือกตำแหน่งงานที่สนใจ ---</option>
-<option value="Software_Engineer">วิศวกรซอฟต์แวร์</option>
-<option value="Data_Analyst">นักวิเคราะห์ข้อมูล</option>
-<option value="Marketing_Specialist">การตลาดดิจิทัล</option>
-<option value="HR_Admin">บุคคลและธุรการ</option>
-</select>
-</div>
+      <div class="mb-3">
+        <label class="form-label">เบอร์โทร</label>
+        <input type="text" name="phone" class="form-control" required pattern="^[0-9]{9,10}$" placeholder="เช่น 089xxxxxxx">
+      </div>
 
-<h5 class="mt-5 mb-3 text-secondary">2. ข้อมูลส่วนตัว</h5>
-<div class="row g-3">
-<div class="col-md-3">
-<label class="form-label">คำนำหน้าชื่อ</label>
-<select class="form-select" name="prefix" required>
-<option value="นาย">นาย</option>
-<option value="นาง">นาง</option>
-<option value="นางสาว">นางสาว</option>
-</select>
-</div>
+      <div class="mb-3">
+        <label class="form-label">อีเมล</label>
+        <input type="email" name="email" class="form-control" required placeholder="เช่น you@email.com">
+      </div>
 
-<div class="col-md-9">
-<label class="form-label">ชื่อ-นามสกุล</label>
-<input type="text" class="form-control" name="fullName" required>
-</div>
+      <div class="mb-3">
+        <label class="form-label">ตำแหน่งที่สมัคร</label>
+        <select name="position" class="form-select" required>
+          <option value="">-- เลือกตำแหน่ง --</option>
+          <option value="พนักงานหน้าร้าน">พนักงานหน้าร้าน</option>
+          <option value="แอดมินเพจ">แอดมินเพจ</option>
+          <option value="พนักงานทั่วไป">พนักงานทั่วไป</option>
+          <option value="อื่นๆ">อื่นๆ</option>
+        </select>
+      </div>
 
-<div class="col-md-6">
-<label class="form-label">วันเดือนปีเกิด</label>
-<input type="date" class="form-control" name="birthDate" required>
-</div>
+      <div class="mb-3">
+        <label class="form-label">หมายเหตุ (ถ้ามี)</label>
+        <textarea name="note" class="form-control" rows="3" placeholder="เช่น ว่างงานช่วงเสาร์-อาทิตย์"></textarea>
+      </div>
 
-<div class="col-md-6">
-<label class="form-label">ระดับการศึกษาสูงสุด</label>
-<select class="form-select" name="educationLevel" required>
-<option value="" disabled selected>--- เลือกระดับการศึกษา ---</option>
-<option value="ปวช">ปวช./ปวส.</option>
-<option value="ปริญญาตรี">ปริญญาตรี</option>
-<option value="ปริญญาโท">ปริญญาโท</option>
-<option value="ปริญญาเอก">ปริญญาเอก</option>
-</select>
-</div>
-</div>
+      <div class="d-grid gap-2">
+        <button type="submit" name="Submit" class="btn btn-primary">ส่งใบสมัคร</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+        <button type="button" class="btn btn-warning" onclick="window.print();">พิมพ์</button>
+      </div>
+    </form>
 
-<h5 class="mt-5 mb-3 text-secondary">3. ข้อมูลเพิ่มเติม (ไม่บังคับ)</h5>
+  </div>
 
-<div class="accordion" id="accordionSections">
+  <div class="mt-4">
+    <?php
+    if(isset($_POST['Submit'])){
+      $name     = trim($_POST['name'] ?? '');
+      $phone    = trim($_POST['phone'] ?? '');
+      $email    = trim($_POST['email'] ?? '');
+      $position = trim($_POST['position'] ?? '');
+      $note     = trim($_POST['note'] ?? '');
 
-<div class="accordion-item">
-<h2 class="accordion-header">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-🌟 ความสามารถพิเศษ/ทักษะอื่นๆ
-</button>
-</h2>
-<div id="collapseOne" class="accordion-collapse collapse">
-<div class="accordion-body">
-<textarea class="form-control" name="skills" rows="3"></textarea>
-</div>
-</div>
-</div>
+      include_once("connectdb.php");
 
-<div class="accordion-item">
-<h2 class="accordion-header">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-💼 ประสบการณ์ทำงาน
-</button>
-</h2>
-<div id="collapseTwo" class="accordion-collapse collapse">
-<div class="accordion-body">
-<textarea class="form-control" name="experience" rows="5"></textarea>
-</div>
-</div>
-</div>
+      $sql  = "INSERT INTO job_apply (j_name, j_phone, j_email, j_position, j_note)
+               VALUES (?, ?, ?, ?, ?)";
+      $stmt = mysqli_prepare($conn, $sql) or die("เตรียมคำสั่งไม่ได้: ".mysqli_error($conn));
 
-</div>
+      mysqli_stmt_bind_param($stmt, "sssss", $name, $phone, $email, $position, $note);
 
-<div class="d-grid gap-2 mt-5">
-<button type="submit" class="btn btn-primary btn-lg">ส่งใบสมัคร</button>
-<button type="reset" class="btn btn-outline-secondary">ล้างข้อมูลในฟอร์ม</button>
-</div>
+      if(mysqli_stmt_execute($stmt)){
+        echo "<script>alert('สมัครงานสำเร็จ');</script>";
 
-</form>
-</div>
-</div>
-</div>
+        // แสดงสรุปแบบสั้นๆ
+        $sn = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $sp = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
+        $se = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+        $sj = htmlspecialchars($position, ENT_QUOTES, 'UTF-8');
+
+        echo "<div class='col-md-6 mx-auto alert alert-success'>
+                <strong>ส่งใบสมัครเรียบร้อย ✅</strong>
+                ชื่อ-สกุล: {$sn}<br>
+                เบอร์โทร: {$sp}<br>
+                อีเมล: {$se}<br>
+                ตำแหน่ง: {$sj}<br>
+              </div>";
+      }else{
+        echo "<div class='col-md-6 mx-auto alert alert-danger'>
+                บันทึกไม่สำเร็จ: ".htmlspecialchars(mysqli_error($conn), ENT_QUOTES, 'UTF-8')."
+              </div>";
+      }
+
+      mysqli_stmt_close($stmt);
+      mysqli_close($conn);
+    }
+    ?>
+  </div>
+
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

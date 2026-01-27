@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>สุพัตรา หาญกุดเลาะ(ปริม)</title>
+<title>อริศรา พวงมาลัย (กุ๊ก)</title>
 </head>
 
 <body>
-<h1>สุพัตรา หาญกุดเลาะ(ปริม)</h1>
+<h1>อริศรา พวงมาลัย (กุ๊ก)</h1>
 
 <form method="post" action="">
 กรอกตัวเลข <input type="number" name="a" autofocus required>

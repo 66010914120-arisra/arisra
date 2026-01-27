@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
 $user = "root";
-$pwd  = "";
-$db   = "4063db";
+$pwd  = "Pw_660109140636769";
+$db   = "4120db";
 
 $conn = mysqli_connect($host, $user, $pwd, $db)
         or die("เชื่อมต่อฐานข้อมูลไม่ได้");
