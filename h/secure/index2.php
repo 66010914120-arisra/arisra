@@ -5,7 +5,7 @@ include_once("check_login.php");
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<title>Dashboard | Admin Panel</title>
+<title>Dashboard | อริศรา พวงมาลัย(กุ๊ก)</title>
 
 <!-- Bootstrap 5.3 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

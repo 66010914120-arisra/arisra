@@ -5,7 +5,7 @@ session_start();
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<title>Login | Admin Panel</title>
+<title>Login | อริศรา พวงมาลัย(กุ๊ก)</title>
 
 <!-- Bootstrap 5.3 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
