@@ -64,7 +64,7 @@ body{
 
 <!-- Sidebar -->
 <div class="col-12 col-md-3 col-lg-2 sidebar p-0">
-    <h5 class="text-white text-center py-4 mb-0">🛠 Admin Panel</h5>
+    <h5 class="text-white text-center py-4 mb-0">🛠 ระบบของ อริศรา</h5>
     <a href="index2.php">🏠 หน้าหลัก</a>
     <a href="products.php">📦 สินค้า</a>
     <a href="orders.php">🧾 ออเดอร์</a>
