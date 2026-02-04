@@ -82,7 +82,7 @@ body{
 <!-- Sidebar -->
 <div class="col-12 col-md-3 col-lg-2 sidebar p-0">
     <h4 class="text-white text-center py-4 mb-0">
-        🛠 Admin Panel
+        🛠 ระบบของ อริศรา
     </h4>
 
     <a href="index2.php" class="active">🏠 Dashboard</a>

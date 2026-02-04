@@ -98,7 +98,7 @@ body{
 
 <!-- Sidebar -->
 <div class="col-12 col-md-3 col-lg-2 sidebar">
-    <h4>⚡ Admin SaaS</h4>
+    <h4>⚡ระบบของ อริศรา</h4>
 
     <a href="index2.php">
         <i class="bi bi-speedometer2"></i> Dashboard
