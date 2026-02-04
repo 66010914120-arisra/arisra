@@ -82,7 +82,7 @@
         <div class="row mb-5">
             <div class="col-md-8">
                 <h1 class="display-5 fw-bold" style="color: #2d3436;">Market Analysis</h1>
-                <p class="text-muted"><i class="fa-solid fa-user-circle me-2"></i>ผู้ดูแลระบบ: สุพัตรา หาญกุดเลาะ (ปริม)</p>
+                <p class="text-muted"><i class="fa-solid fa-user-circle me-2"></i>ผู้ดูแลระบบ:อริศรา พวงมาลัย(กุ๊ก)</p>
             </div>
             <div class="col-md-4 text-md-end">
                 <div class="badge bg-primary p-3 rounded-4 shadow-sm">
