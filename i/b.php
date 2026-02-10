@@ -1,48 +1,73 @@
-<!doctype html>
+<?php include_once("connectdb.php"); ?>
+<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="utf-8">
 <title>ข้อมูลจังหวัด</title>
-
-<style>
-body{
-    font-family: Tahoma, sans-serif;
-}
-
-table{
-    border-collapse: collapse;
-    width: 90%;
-    margin: auto;
-}
-
-th, td{
-    border: 1px solid #000;
-    padding: 6px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-th{
-    background: #f2f2f2;
-}
-
-td.name{
-    text-align: left;
-    padding-left: 10px;
-}
-
-img{
-    width: 120px;   
-    height: auto;
-}
-</style>
 </head>
-
 <body>
 
+<h1>งาน i</h1>
 <h2>ข้อมูลจังหวัด --- อริศรา พวงมาลัย (กุ๊ก)</h2>
 
-<table>
+<!-- 🔹 ต้องเพิ่ม enctype -->
+<form method="post" enctype="multipart/form-data">
+    ชื่อจังหวัด
+    <input type="text" name="pname" required><br>
+
+    ชื่อภาค
+    <select name="rid">
+        <?php
+        $sql3 = "SELECT * FROM regions ORDER BY r_name ASC";
+        $rs3  = mysqli_query($conn, $sql3);
+        while ($r = mysqli_fetch_assoc($rs3)) {
+        ?>
+            <option value="<?php echo $r['r_id']; ?>">
+                <?php echo $r['r_name']; ?>
+            </option>
+        <?php } ?>
+    </select><br>
+
+    รูปภาพ
+    <input type="file" name="photo" required><br><br>
+
+    <button type="submit" name="Submit">บันทึก</button>
+</form>
+
+<br><br>
+
+<?php
+/* ===== บันทึกข้อมูล + upload รูป ===== */
+if (isset($_POST['Submit'])) {
+    $pname = $_POST['pname'];
+    $rid   = $_POST['rid'];
+
+    // ดึงนามสกุลไฟล์
+    $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+
+    // บันทึกข้อมูล
+    $sql = "INSERT INTO provinces (p_name, p_ext, r_id)
+            VALUES ('$pname','$ext','$rid')";
+    mysqli_query($conn, $sql);
+
+    // เอา id ล่าสุดมาใช้ตั้งชื่อรูป
+    $pid = mysqli_insert_id($conn);
+
+    // ย้ายไฟล์รูป
+    move_uploaded_file(
+        $_FILES['photo']['tmp_name'],
+        "img/".$pid.".".$ext
+    );
+}
+
+/* ===== แสดงข้อมูล ===== */
+$sql = "SELECT p.*, r.r_name
+        FROM provinces p
+        INNER JOIN regions r ON p.r_id = r.r_id";
+$rs = mysqli_query($conn, $sql);
+?>
+
+<table border="1" cellpadding="5">
 <tr>
     <th>รหัส</th>
     <th>ชื่อจังหวัด</th>
@@ -50,24 +75,12 @@ img{
     <th>ภาค</th>
 </tr>
 
-<?php
-include_once("connectdb.php");
-
-$sql = "SELECT p.p_id, p.p_name, p.p_ext, r.r_name
-        FROM provinces p
-        INNER JOIN regions r
-        ON p.r_id = r.r_id
-        ORDER BY p.p_id ASC";
-
-$rs = mysqli_query($conn, $sql);
-
-while($data = mysqli_fetch_array($rs)){
-?>
+<?php while ($data = mysqli_fetch_assoc($rs)) { ?>
 <tr>
     <td><?php echo $data['p_id']; ?></td>
-    <td class="name"><?php echo $data['p_name']; ?></td>
+    <td><?php echo $data['p_name']; ?></td>
     <td>
-        <img src="images/<?php echo $data['p_id']; ?>.<?php echo $data['p_ext']; ?>">
+        <img src="img/<?php echo $data['p_id']; ?>.<?php echo $data['p_ext']; ?>" width="120">
     </td>
     <td><?php echo $data['r_name']; ?></td>
 </tr>
