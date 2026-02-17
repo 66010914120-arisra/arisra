@@ -1,4 +1,10 @@
-<?php include_once("connectdb.php"); ?>
+<?php 
+include_once("connectdb.php");
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -10,13 +16,12 @@
 <h1>งาน i</h1>
 <h2>ข้อมูลจังหวัด --- อริศรา พวงมาลัย (กุ๊ก)</h2>
 
-<!-- 🔹 ต้องเพิ่ม enctype -->
 <form method="post" enctype="multipart/form-data">
     ชื่อจังหวัด
     <input type="text" name="pname" required><br>
 
     ชื่อภาค
-    <select name="rid">
+    <select name="rid" required>
         <?php
         $sql3 = "SELECT * FROM regions ORDER BY r_name ASC";
         $rs3  = mysqli_query($conn, $sql3);
@@ -37,38 +42,57 @@
 <br><br>
 
 <?php
-/* ===== บันทึกข้อมูล + upload รูป ===== */
+/* =======================
+   บันทึกข้อมูล + Upload
+======================= */
 if (isset($_POST['Submit'])) {
-    $pname = $_POST['pname'];
+
+    $pname = mysqli_real_escape_string($conn, $_POST['pname']);
     $rid   = $_POST['rid'];
 
-    // ดึงนามสกุลไฟล์
-    $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+    if ($_FILES['photo']['error'] == 0) {
 
-    // บันทึกข้อมูล
-    $sql = "INSERT INTO provinces (p_name, p_ext, r_id)
-            VALUES ('$pname','$ext','$rid')";
-    mysqli_query($conn, $sql);
-    //กรณีบันทึกข้อมูลไม่ได
-    //$sq2 = "INSERT INTO provinces VALUES (NULL,'{$pname}','{$ex}','{$rid}')";
-    //mysqli_query($conn, $sq2); or die ("insert ไม่ได้");
-    //$pic_id = mysqli_insert_id($conn);
-    //copy($_FILES['pimage'],['name'],"images/")
-    
-    // เอา id ล่าสุดมาใช้ตั้งชื่อรูป
-    $pid = mysqli_insert_id($conn);
+        // ตรวจสอบชนิดไฟล์
+        $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+        $allow = array("jpg","jpeg","png","gif");
 
-    // ย้ายไฟล์รูป
-    move_uploaded_file(
-        $_FILES['photo']['tmp_name'],
-        "img/".$pid.".".$ext
-    );
+        if (!in_array($ext, $allow)) {
+            die("อนุญาตเฉพาะไฟล์ jpg, jpeg, png, gif เท่านั้น");
+        }
+
+        // บันทึกข้อมูลก่อน
+        $sql = "INSERT INTO provinces (p_name, p_ext, r_id)
+                VALUES ('$pname','$ext','$rid')";
+        mysqli_query($conn, $sql);
+
+        $pid = mysqli_insert_id($conn);
+
+        // ถ้าไม่มีโฟลเดอร์ img ให้สร้าง
+        if (!is_dir("img")) {
+            mkdir("img", 0777, true);
+        }
+
+        // ย้ายไฟล์
+        move_uploaded_file(
+            $_FILES['photo']['tmp_name'],
+            "img/".$pid.".".$ext
+        );
+
+        echo "บันทึกข้อมูลเรียบร้อย ✅";
+    } 
+    else {
+        echo "อัปโหลดรูปไม่ได้ Error Code: " . $_FILES['photo']['error'];
+    }
 }
 
-/* ===== แสดงข้อมูล ===== */
+/* =======================
+   แสดงข้อมูล
+======================= */
 $sql = "SELECT p.*, r.r_name
         FROM provinces p
-        INNER JOIN regions r ON p.r_id = r.r_id";
+        INNER JOIN regions r ON p.r_id = r.r_id
+        ORDER BY p.p_id ASC";
+
 $rs = mysqli_query($conn, $sql);
 ?>
 
@@ -85,7 +109,14 @@ $rs = mysqli_query($conn, $sql);
     <td><?php echo $data['p_id']; ?></td>
     <td><?php echo $data['p_name']; ?></td>
     <td>
-        <img src="img/<?php echo $data['p_id']; ?>.<?php echo $data['p_ext']; ?>" width="120">
+        <?php
+        $img_path = "img/".$data['p_id'].".".$data['p_ext'];
+        if (file_exists($img_path)) {
+            echo '<img src="'.$img_path.'" width="120">';
+        } else {
+            echo "ไม่มีรูป";
+        }
+        ?>
     </td>
     <td><?php echo $data['r_name']; ?></td>
 </tr>
