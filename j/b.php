@@ -49,7 +49,12 @@ if (isset($_POST['Submit'])) {
     $sql = "INSERT INTO provinces (p_name, p_ext, r_id)
             VALUES ('$pname','$ext','$rid')";
     mysqli_query($conn, $sql);
-
+    //กรณีบันทึกข้อมูลไม่ได
+    //$sq2 = "INSERT INTO provinces VALUES (NULL,'{$pname}','{$ex}','{$rid}')";
+    //mysqli_query($conn, $sq2); or die ("insert ไม่ได้");
+    //$pic_id = mysqli_insert_id($conn);
+    //copy($_FILES['pimage'],['name'],"images/")
+    
     // เอา id ล่าสุดมาใช้ตั้งชื่อรูป
     $pid = mysqli_insert_id($conn);
 
