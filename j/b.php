@@ -19,12 +19,6 @@ ini_set('display_errors', 1);
 <form method="post" enctype="multipart/form-data">
     ชื่อจังหวัด
     <input type="text" name="pname" required><br>
-    <?
-    $sql = "SELECT p.*, r.r_name
-        FROM provinces p
-        INNER JOIN regions r ON p.r_id = r.r_id
-        ORDER BY p.p_name ASC";
-    ?>
 
     ชื่อภาค
     <select name="rid" required>
